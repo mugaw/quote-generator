@@ -70,22 +70,41 @@ body {
     transform: scale(1.05);
 }
 
+@media (max-width: 480px) {
+    .container {
+        padding: 10% 15px;
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 10% 15px;
     }
     
-    #quote-category {
-        max-width: 100%; /* Ensure the dropdown takes full width on small screens */
+    #quote-category, #generate-quote {
+        max-width: none;
+        text-align: center;
+    }
+
+    #quote-category option{
+        text-align: center;
     }
 }
 
 @media (max-width: 400px) {
+    body {
+        padding: 10px;
+    }
+    
     .container {
         padding: 5% 10px;
     }
-
-    #quote-category {
-        font-size: clamp(0.8rem, 3vw, 1rem); /* Adjust font size for smaller screens */
+    
+    #quote {
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    }
+    
+    #generate-quote {
+        padding: 8px 16px;
     }
 }

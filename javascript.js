@@ -1,3 +1,11 @@
+document.getElementById('generate-quote').addEventListener('click', function() {
+    generateQuote();
+});
+
+document.getElementById('generate-quote').addEventListener('touchstart', function() {
+    generateQuote();
+});
+
 async function generateQuote() {
     const category = document.getElementById('quote-category').value;
     let url = 'https://api.quotable.io/random';
