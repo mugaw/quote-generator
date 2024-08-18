@@ -1,110 +1,129 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Serif+Text:ital@0;1&family=Edu+VIC+WA+NT+Beginner:wght@400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Serif+Text:ital@0;1&family=Edu+VIC+WA+NT+Beginner:wght@400..700&display=swap");
 * {
-    margin: 0;
-    padding: 0;
-    font-weight: 900;
-    box-sizing: border-box;
-    font-family: 'caveat', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
+  box-sizing: border-box;
+  font-family: "caveat", sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    background-image: url("photorealistic-view-tree-nature-with-branches-trunk.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  background-image: url("photorealistic-view-tree-nature-with-branches-trunk.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+  flex-direction: column;
 }
 
 #quote-category {
-    width: 100%;
-    text-align: center;
-    max-width: 200px;
-    padding: 8px;
-    font-size: clamp(0.8rem, 2.5vw, 1rem);
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(240, 240, 240,.5);
-    color: #333; 
-    cursor: pointer;
+  width: 100%;
+  text-align: center;
+  max-width: 200px;
+  padding: 8px;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(240, 240, 240, 0.5);
+  color: #333;
+  cursor: pointer;
 }
 
 .container {
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 5% 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 5% 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .quote-box {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #quote {
-    font-size: clamp(1rem, 4vw, 1.5rem);
-    margin-bottom: 20px;
-    color: rgba(51, 51, 51, 0.9);
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  margin-bottom: 20px;
+  color: rgba(51, 51, 51, 0.9);
 }
 
 #generate-quote {
-    padding: 10px 20px;
-    font-size: clamp(0.8rem, 3vw, 1rem);
-    background-color: rgba(47, 31, 18,.9);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.8s ease-in-out;
+  padding: 10px 20px;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  background-color: rgba(47, 31, 18, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.8s ease-in-out;
 }
 
 #generate-quote:hover {
-    background-color: rgba(191, 59, 21,.9);
-    transform: scale(1.05);
+  background-color: rgba(191, 59, 21, 0.9);
+  transform: scale(1.05);
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10% 15px;
-    }
+  .container {
+    padding: 10% 15px;
+  }
 }
 
 @media (max-width: 600px) {
-    .container {
-        padding: 10% 15px;
-    }
-    
-    #quote-category, #generate-quote {
-        max-width: none;
-        text-align: center;
-    }
+  .container {
+    padding: 10% 15px;
+  }
 
-    #quote-category option{
-        text-align: center;
-    }
+  #quote-category,
+  #generate-quote {
+    max-width: none;
+    text-align: center;
+  }
+
+  #quote-category option {
+    text-align: center;
+  }
+}
+
+footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 10px 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  color: rgba(51, 51, 51, 0.9);
+  position: absolute;
+  bottom: 0;
+  font-size: larger;
+  font-weight: 900;
+}
+
+.heart {
+  color: rgba(204, 0, 0, 0.9);
 }
 
 @media (max-width: 400px) {
-    body {
-        padding: 10px;
-    }
-    
-    .container {
-        padding: 5% 10px;
-    }
-    
-    #quote {
-        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
-    }
-    
-    #generate-quote {
-        padding: 8px 16px;
-    }
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 5% 10px;
+  }
+
+  #quote {
+    font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+  }
+
+  #generate-quote {
+    padding: 8px 16px;
+  }
 }
