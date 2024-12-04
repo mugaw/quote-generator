@@ -1,26 +1,33 @@
-document.getElementById('generate-quote').addEventListener('click', function() {
-    generateQuote();
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const generateButton = document.getElementById('generate-quote');
+    const quoteElement = document.getElementById('quote');
+    const categorySelect = document.getElementById('quote-category');
 
-document.getElementById('generate-quote').addEventListener('touchstart', function() {
-    generateQuote();
-});
+    function generateQuote() {
+        const category = categorySelect.value;
+        let url = 'https://api.quotable.io/random';
+        
+        if (category) {
+            url += `?tags=${category}`;
+        }
 
-async function generateQuote() {
-    const category = document.getElementById('quote-category').value;
-    let url = 'https://api.quotable.io/random';
-    
-    if (category) {
-        url += `?tags=${category}`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                quoteElement.textContent = `"${data.content}" — ${data.author}`;
+            })
+            .catch(error => {
+                console.error('Error fetching quote:', error);
+                quoteElement.textContent = 'Failed to fetch a new quote. Please try again.';
+            });
     }
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        document.getElementById('quote').textContent = `"${data.content}" — ${data.author}`;
-    } catch (error) {
-        document.getElementById('quote').textContent = 'Failed to fetch a new quote. Please try again.';
-    }
-}
-
-document.getElementById('generate-quote').addEventListener('click', generateQuote);
+    // Single event listener for multiple interaction types
+    generateButton.addEventListener('click', generateQuote);
+    generateButton.addEventListener('touchstart', generateQuote);
+});
