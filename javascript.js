@@ -3,15 +3,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const quoteElement = document.getElementById('quote');
     const categorySelect = document.getElementById('quote-category');
 
-    function generateQuote() {
-        const category = categorySelect.value;
-        let url = 'https://api.quotable.io/random';
-        
-        if (category) {
-            url += `?tags=${category}`;
+    // Multiple free quote APIs for redundancy
+    const quoteApis = [
+        {
+            url: 'https://dummyjson.com/quotes/random',
+            handler: (data) => ({
+                quote: data.quote,
+                author: data.author || 'Unknown'
+            })
+        },
+        {
+            url: 'https://api.adviceslip.com/advice',
+            handler: (data) => ({
+                quote: data.slip.advice,
+                author: 'Advice Slip'
+            })
         }
+    ];
 
-        fetch(url)
+    function generateQuote() {
+        // Choose a random API endpoint
+        const currentApi = quoteApis[Math.floor(Math.random() * quoteApis.length)];
+
+        fetch(currentApi.url)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -19,15 +33,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                quoteElement.textContent = `"${data.content}" — ${data.author}`;
+                // Process quote using the specific API's handler
+                const processedQuote = currentApi.handler(data);
+                
+                // Display the quote
+                quoteElement.textContent = `"${processedQuote.quote}" — ${processedQuote.author}`;
             })
             .catch(error => {
                 console.error('Error fetching quote:', error);
-                quoteElement.textContent = 'Failed to fetch a new quote. Please try again.';
+                quoteElement.textContent = 'Unable to fetch a quote. Please try again.';
             });
     }
 
-    // Single event listener for multiple interaction types
+    // Add event listeners
     generateButton.addEventListener('click', generateQuote);
     generateButton.addEventListener('touchstart', generateQuote);
+
+    // Generate initial quote on page load
+    generateQuote();
 });
