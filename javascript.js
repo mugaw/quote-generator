@@ -1,23 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
     const quoteDisplay = document.getElementById("quote");
     const generateQuoteBtn = document.getElementById("generate-quote");
+    const categorySelect = document.getElementById("quote-category");
 
-    let quotes = [];
+    let quotes = {};
 
     // Load the quotes JSON file
-    fetch('all_quotes.json')
+    fetch('quotes.json')
         .then(response => response.json())
         .then(data => {
             quotes = data;
+            console.log("Quotes loaded:", quotes); // Debugging to ensure quotes are loaded
         })
         .catch(error => console.error('Error fetching quotes:', error));
 
-    // Generate a random quote
+    // Generate a random quote based on the selected category
     const generateQuote = () => {
-        if (quotes.length > 0) {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const randomQuote = quotes[randomIndex];
-            quoteDisplay.textContent = `"${randomQuote.content}" — ${randomQuote.author}`;
+        const selectedCategory = categorySelect.value;
+        console.log("Selected category:", selectedCategory); // Debugging
+        let selectedQuotes = [];
+
+        if (selectedCategory && quotes[selectedCategory]) {
+            selectedQuotes = quotes[selectedCategory];
+        } else if (!selectedCategory) {
+            // Combine all quotes if "Random" is selected
+            selectedQuotes = Object.values(quotes).flat();
+        }
+
+        if (selectedQuotes.length > 0) {
+            const randomIndex = Math.floor(Math.random() * selectedQuotes.length);
+            const randomQuote = selectedQuotes[randomIndex];
+            quoteDisplay.textContent = `"${randomQuote.quote}" — ${randomQuote.author}`;
         } else {
             quoteDisplay.textContent = "No quotes available.";
         }
